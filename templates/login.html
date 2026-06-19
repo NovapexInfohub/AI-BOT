@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – AI Agent Platform</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: stretch;
+            background: #f4f6ff;
+        }
+
+        /* ===== LEFT PANEL ===== */
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 48px;
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .left-inner {
+            width: 100%;
+            max-width: 380px;
+
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 36px;
+        }
+
+        .brand-icon {
+            width: 42px; height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+        }
+
+        .brand-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a2e;
+            letter-spacing: -.3px;
+        }
+
+        .left-inner h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: #1a1a2e;
+            letter-spacing: -.5px;
+            margin-bottom: 6px;
+            align-items: center;
+        }
+
+        .left-inner .subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        /* inputs */
+        .field {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .field-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 15px;
+            color: #aaa;
+            pointer-events: none;
+        }
+
+        .left-inner input {
+            width: 100%;
+            padding: 13px 16px 13px 42px;
+            border: 1.5px solid #e8eaf0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            color: #1a1a2e;
+            background: #fafbff;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .left-inner input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102,126,234,.12);
+            background: #fff;
+        }
+
+        .left-inner input::placeholder { color: #bbb; }
+
+        /* login button */
+        .action-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            letter-spacing: .2px;
+            transition: opacity .2s, transform .15s;
+            box-shadow: 0 6px 20px rgba(102,126,234,.35);
+        }
+
+        .action-btn:hover  { opacity: .9; transform: translateY(-1px); }
+        .action-btn:active { transform: translateY(0); opacity: 1; }
+
+        .left-inner p {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 13.5px;
+            color: #888;
+        }
+
+        .left-inner p a {
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .left-inner p a:hover { text-decoration: underline; }
+
+
+        /* ===== RIGHT PANEL ===== */
+        .right-panel {
+            width: 46%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 64px 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* decorative circles */
+        .right-panel::before {
+            content: '';
+            position: absolute;
+            width: 340px; height: 340px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.06);
+            top: -80px; right: -80px;
+        }
+        .right-panel::after {
+            content: '';
+            position: absolute;
+            width: 220px; height: 220px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.05);
+            bottom: -40px; left: -40px;
+        }
+
+        .right-panel h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 34px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+            letter-spacing: -.5px;
+            margin-bottom: 18px;
+            position: relative; z-index: 1;
+        }
+
+        .right-panel .tagline {
+            font-size: 15px;
+            color: rgba(255,255,255,.78);
+            line-height: 1.65;
+            margin-bottom: 36px;
+            max-width: 360px;
+            position: relative; z-index: 1;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative; z-index: 1;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            font-size: 15px;
+            color: rgba(255,255,255,.92);
+            font-weight: 500;
+        }
+
+        .feature-list li .check {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.18);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 28px;
+            margin-top: 44px;
+            position: relative; z-index: 1;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .stat-num {
+            font-family: 'Poppins', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255,255,255,.6);
+            letter-spacing: .3px;
+        }
+
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .right-panel { width: 100%; padding: 40px 32px; }
+            .right-panel h3 { font-size: 26px; }
+            .stat-row { gap: 20px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ===== LEFT: LOGIN FORM ===== -->
+    <div class="left-panel">
+        <div class="left-inner">
+
+            <div class="brand">
+                <div class="brand-icon">🤖</div>
+                <span class="brand-name">AI Agent Platform</span>
+            </div>
+
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Sign in to your account to continue</p>
+
+            <form method="POST" action="/login">
+
+                <div class="field">
+                    <span class="field-icon">👤</span>
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+
+                <div class="field">
+                    <span class="field-icon">🔒</span>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+
+                <button class="action-btn">Login</button>
+            </form>
+
+            <p>Don't have an account? <a href="/register">Register</a></p>
+
+        </div>
+    </div>
+
+
+    <!-- ===== RIGHT: INFO PANEL ===== -->
+    <div class="right-panel">
+
+        <h3>Power Your Business<br>with AI Agents</h3>
+
+        <p class="tagline">
+            Join thousands of teams using our platform to build,
+            deploy, and manage intelligent AI agents — all in one place.
+        </p>
+
+        <ul class="feature-list">
+            <li>
+                <span class="check">✓</span>
+                Build custom AI agents in minutes
+            </li>
+            <li>
+                <span class="check">✓</span>
+                Seamless integration with your tools
+            </li>
+            <li>
+                <span class="check">✓</span>
+                Real-time analytics & monitoring
+            </li>
+            <li>
+                <span class="check">✓</span>
+                Secure, scalable infrastructure
+            </li>
+            <li>
+                <span class="check">✓</span>
+                24/7 intelligent support
+            </li>
+        </ul>
+
+        <!-- <div class="stat-row">
+            <div class="stat">
+                <span class="stat-num">10K+</span>
+                <span class="stat-label">Active Users</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num">500+</span>
+                <span class="stat-label">AI Agents Built</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num">99.9%</span>
+                <span class="stat-label">Uptime</span>
+            </div>
+        </div> -->
+
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login to AI Agent Platform</h2>
+        <form method="POST" action="/login">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password">
+            <button class="action-btn">Login</button>
+        </form>
+        <p>
+            Don't have account? <a href="/register"> Register</a>
+        </p>
+    </div>
+    
+</body>
+</html> -->

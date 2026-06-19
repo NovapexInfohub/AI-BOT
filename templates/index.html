@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Agent Builder</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Agent Platform 🤖</h1>
+
+<div class="tabs">
+<button class="tab-btn active" onclick="openTab(event,'nameBot')">NameBot</button>
+<button class="tab-btn" onclick="openTab(event,'build')">Build</button>
+<button class="tab-btn" onclick="openTab(event,'train')">Train</button>
+<button class="tab-btn" onclick="openTab(event,'test')">Test</button> 
+<button class="tab-btn" onclick="openTab(event,'publish')">Publish</button>
+</div>
+
+<div id="dashboardSection" style="margin-top:30px;">
+    <h2>Your AI Agent</h2>
+    <div id="agentDetails" style="margin-bottom: 15px;"></div>
+    <h3>Training Data</h3>
+    <ul id="trainingList"></ul>
+</div>
+
+<!-- NAME BOT TAB -->
+<div id="nameBot" class="tab-content active">
+<h2>Name Your Chatbot</h2>
+<input type="text" id="botName" placeholder="Example: Siri">
+<button class="action-btn" onclick="saveBotName()">Save Name</button>
+<p id="botSaved"></p>
+</div>
+
+
+<!-- BUILD TAB -->
+<div id="build" class="tab-content">
+<h2 id="buildTitle">Create AI Agent</h2>
+<textarea id="prompt" placeholder="Example: Create a medical AI assistant..."></textarea>
+<button class="action-btn" onclick="createAgent()">Build Agent</button>
+</div>
+
+
+<!-- TRAIN TAB -->
+<div id="train" class="tab-content">
+<h2>Train Your Agent</h2>
+<h4>Upload Files</h4>
+<input type="file" id="file" multiple onchange="showFileList()">
+<ul id="fileList"></ul>
+<!-- <h4>Train using Website URL</h4>
+<input type="text" id="url" placeholder="Enter webpage URL"> -->
+<h4>Train using Website Crawler</h4>
+<input type="text" id="crawl_url" placeholder="Enter website domain (ex: https://example.com)">
+<button class="action-btn" onclick="trainAgent()">Train Agent</button>
+
+<div id="loader" class="loader-container" style="display:none;">
+    <div class="loader"></div>
+    <p>Training your AI Agent...</p>
+</div>
+</div>
+
+
+<!-- TEST TAB -->
+<div id="test" class="tab-content">
+<h2>Test Your Chatbot</h2>
+<input id="question" placeholder="Ask something">
+<button class="action-btn" onclick="askQuestion()">Ask</button>
+<br><br>
+<div id="answer" style="background:#f2f2f2;padding:10px;"></div>
+</div>
+
+
+<!-- PUBLISH TAB -->
+<div id="publish" class="tab-content">
+<h2>Publish Chatbot</h2>
+<button class="action-btn" onclick="getEmbed()">Generate Embed Code</button>
+<pre id="embed"></pre>
+</div>
+</div>
+
+<script src="/static/js/script.js"></script>
+
+<script>
+let botNamed = false;
+let botBuilt = false;
+let botTrained = false;
+let botTested = false;
+</script>
+<div id="toast-container"></div>
+
+<script>
+window.onload = function(){
+    loadAgentDashboard();
+}
+</script>
+</body>
+</html>
+
+
+
